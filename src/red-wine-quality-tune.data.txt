@@ -1,0 +1,379 @@
+// This dataset is used to predict the quality of red wine based on various physicochemical properties.
+
+// The structure of this dataset is described below.
+// (we're using a very restricted design for simplicity).
+
+// You can visit
+//    http://archive.ics.uci.edu/ml/datasets/Wine+Quality
+// to see more about this dataset.
+
+// NOTE: Your code should handle both Windows-formatted and Linux-formatted files
+// (which, unfortunately, differ in how the end of line is represented).
+
+// Your code should HANDLE ANY AMOUNT OF 'white space,' including blank lines, BETWEEN TOKENS.
+
+// Note that you only need to handle '//' comments (ie, there will be no "/* */" comments.
+// It is easy in Java to the contents of a string BEFORE any '//' (might get the empty string,
+// which should also be ignored).
+
+// For simplicity, this dataset contains 20 boolean-valued features which were derived 
+// from the original 11 real-valued features. The boolean-valued features were generated
+// by normalizing (range 0-100) and discretizing the real-valued features. The threshold
+// values appear in the feature name. For example, fixedAcidityGt47 is T if the fixedAcidity 
+// of the example is greater than 47, and F if the fixedAcidity of the example is less than 47.
+
+// The number of features:
+20
+
+// Next are the feature names followed by a dash and then the legal values of this feature
+// In the CS 540 programming HWs related to decision trees, we will assume that all features have
+// two possible values, though they might have names other than the T and F used here (eg,
+// might have: "size - small big" in some other testbed used during grading).
+
+fixedAcidityGt47 - T F
+
+volatileAcidityGt17 - T F
+volatileAcidityGt29 - T F
+
+citricAcidGt30 - T F
+
+residualSugarGtMean - T F
+
+chloridesGt9 - T F
+
+freeSulfurDioxideGtMean - T F
+
+totalSulfurDioxideGt27 - T F
+totalSulfurDioxideGt37 - T F
+totalSulfurDioxideGt54 - T F
+
+densityGt18 - T F
+densityGt41 - T F
+
+pHGtMean - T F
+
+sulphatesGt12 - T F
+sulphatesGt15 - T F
+sulphatesGt19 - T F
+sulphatesGt44 - T F
+
+alcoholGt22 - T F
+alcoholGt33 - T F
+alcoholGt47 - T F
+
+// The original class label was a rating of the wine on a scale from 0-10. In this dataset, ratings  
+// from 0-5 are combined into "lowToMid" and ratings from 6-10 are combined into "midToHigh".
+// Assume that for CS 540 HWs, only two values are possible for the class label.
+lowToMid
+midToHigh
+
+// The number of examples (will read this many in; ok to have more in the file)
+298
+
+// The examples (as mentioned above, we assume, for simplicity, that all features are BOOLEAN-VALUED, 
+// *though the names of the two values might differ across datasets*)
+
+//   First is the example's name, then its category, finally followed
+//   by the values of all of its features (listed in the order of the
+//   feature names above, will be separated by "whitespace"). 
+//   The (boring) names are simply used to concisely identify the examples.
+//   Your decision-tree learner should NOT use these names as a feature (what would happen if you did?).
+
+tuneEx1 midToHigh T F F T F F F F F F T T F T T T F T F F
+tuneEx2 midToHigh F T T F F T T T F F T T F T F F F F F F
+tuneEx3 midToHigh F T F F F T F F F F T F T T F F F T F F
+tuneEx4 lowToMid F T F F F T T F F F T T F F F F F F F F
+tuneEx5 midToHigh F T T F F T T T F F T F T T T T F T T F
+tuneEx6 lowToMid F T F T F T T T T F T T T T T T F F F F
+tuneEx7 lowToMid F T F F F T T F F F T T T T T T F F F F
+tuneEx8 midToHigh T F F T T T F F F F T T T T T T F T F F
+tuneEx9 lowToMid F T F F F T F F F F T F T T F F F F F F
+tuneEx10 midToHigh F F F F T F T T T T T T T T F F F T F F
+tuneEx11 lowToMid F T T F F T F F F F T T T F F F F F F F
+tuneEx12 midToHigh F F F T F F T F F F T T T T T T F T F F
+tuneEx13 midToHigh F T T F F F F F F F T F T T T T F T T F
+tuneEx14 midToHigh F T T F F T F F F F T T T T T T F F F F
+tuneEx15 midToHigh F T F F F T T F F F T F T T T F F T T F
+tuneEx16 lowToMid F T T F T T T T F F T T F T F F F F F F
+tuneEx17 midToHigh F T T T T T T F F F T T T T T T F T T T
+tuneEx18 lowToMid F T T F T T T F F F T T F T F F F F F F
+tuneEx19 lowToMid F T F F T T F F F F T T T T T T F T T F
+tuneEx20 midToHigh F T F T F F T F F F T F F T T F F T T T
+tuneEx21 midToHigh F T T F F T T F F F T T F T F F F F F F
+tuneEx22 lowToMid F T T F F F F F F F T F T T F F F T T T
+tuneEx23 lowToMid F T T F T T T F F F T F F F F F F F F F
+tuneEx24 lowToMid F T F F F F F F F F T F T F F F F F F F
+tuneEx25 midToHigh T F F T F T F F F F T T F T T T F T T F
+tuneEx26 midToHigh T F F T F T F F F F T T F T T T F F F F
+tuneEx27 midToHigh F T F F F T F F F F T T F T T F F F F F
+tuneEx28 midToHigh F T F F F T T T T F T T F T T T T T F F
+tuneEx29 lowToMid F T T F T T F F F F T T F T T F F F F F
+tuneEx30 lowToMid F F F T T T F F F F T T T T T T F T T F
+tuneEx31 midToHigh F T F F F F T F F F T F T T T T F T F F
+tuneEx32 midToHigh T T F T T T T T F F T T F T T T F T T T
+tuneEx33 lowToMid F T T F F T F F F F T F T T T F F T F F
+tuneEx34 lowToMid F T F F T T T T T F T T F T F F F F F F
+tuneEx35 midToHigh F F F T F T F F F F T F F T T T F T T T
+tuneEx36 lowToMid F T T F F T F F F F T T T T T T F F F F
+tuneEx37 midToHigh F T F F F F F F F F T T F T F F F T F F
+tuneEx38 lowToMid F T T T T F T T T F T T F T T T T T F F
+tuneEx39 midToHigh F T T F T T T F F F T T F F F F F T F F
+tuneEx40 lowToMid F T T F F T F F F F T T T F F F F T T F
+tuneEx41 lowToMid F T T F F T F F F F T T T T F F F F F F
+tuneEx42 midToHigh F T F T F F F F F F T F T T T T F T T T
+tuneEx43 lowToMid F T T F F T F F F F T T F F F F F F F F
+tuneEx44 lowToMid F T T F T T F F F F T T T F F F F T T F
+tuneEx45 lowToMid F T T F T T T T F F T T F T F F F F F F
+tuneEx46 lowToMid T T F T T T T F F F T T F T T T F T T T
+tuneEx47 lowToMid F T T F T T F T F F T T T T F F F F F F
+tuneEx48 midToHigh F F F T F F T F F F T F T T T T F T T T
+tuneEx49 midToHigh F F F T F T F F F F T T F T T T F F F F
+tuneEx50 midToHigh F T F T T T T F F F T T T T T T T T T F
+tuneEx51 lowToMid F T T T F T T F F F T T T T T F F F F F
+tuneEx52 midToHigh F F F T F F F F F F T F T T F F F T T T
+tuneEx53 lowToMid F T T F T T F T T F T T F T T F F F F F
+tuneEx54 lowToMid T T F T F T T F F F T T F T F F F T F F
+tuneEx55 midToHigh F F F F F F T F F F T T T T T T F F F F
+tuneEx56 lowToMid F T F T F T T T T F T T F T T F F F F F
+tuneEx57 lowToMid F F F T F T T F F F T T T F F F F F F F
+tuneEx58 lowToMid F T T F T F F F F F T F T F F F F T T F
+tuneEx59 midToHigh F T F T F T F F F F T T F T T T F T T T
+tuneEx60 lowToMid F T F T F T F F F F T T F T F F F T T F
+tuneEx61 midToHigh F T F F F T F F F F T F T T T T F T T F
+tuneEx62 lowToMid T T T T F F F F F F T T F T T T F T T F
+tuneEx63 lowToMid F T T F F T F F F F T T T T F F F F F F
+tuneEx64 midToHigh F T T F T T F F F F T T T T T T F T F F
+tuneEx65 lowToMid F T T F T T F T F F T T F T T F F F F F
+tuneEx66 lowToMid F T F T T T F T F F T T T T T T F T F F
+tuneEx67 lowToMid F T T F F T T F F F T F T T F F F T F F
+tuneEx68 midToHigh T F F T T T T F F F T T F T T T F T T F
+tuneEx69 lowToMid T T T F F T F F F F T T F T F F F F F F
+tuneEx70 midToHigh T T T T T T F F F F T T F T T T F T F F
+tuneEx71 lowToMid F T T F T T F F F F T T T F F F F F F F
+tuneEx72 midToHigh F F F T T T F F F F T T T T T T F T T F
+tuneEx73 lowToMid F T T F F T F F F F T F T T T F F T F F
+tuneEx74 lowToMid F T T F T T F T F F T T T T F F F F F F
+tuneEx75 lowToMid F T T F F T F T F F T T T T T F F F F F
+tuneEx76 midToHigh F T F F F F T T F F F F T T T T F T T T
+tuneEx77 lowToMid F T F F F T F F F F T F F F F F F F F F
+tuneEx78 lowToMid F T T F T T T F F F T T F T F F F F F F
+tuneEx79 lowToMid F T T F F F F F F F T T T T T T F F F F
+tuneEx80 lowToMid F F F F F T F F F F T F T F F F F T F F
+tuneEx81 lowToMid F T T F T T F F F F T T T T T F F T F F
+tuneEx82 midToHigh F F F T F T T F F F T F F T T F F T T T
+tuneEx83 midToHigh T F F T F T F F F F T T F T T T F T T F
+tuneEx84 midToHigh T F F T T T T F F F T T T T T T F T T F
+tuneEx85 midToHigh F F F T F T F F F F T T F T T T F F F F
+tuneEx86 midToHigh F T F F F T T F F F T F T T T F F T F F
+tuneEx87 lowToMid F T F F F T F T F F T T F T T T F F F F
+tuneEx88 midToHigh F F F T F T T F F F T F F T T T F T T F
+tuneEx89 lowToMid F F F F F T F F F F T F T F F F F T F F
+tuneEx90 lowToMid F T T F F T F F F F T T T T F F F F F F
+tuneEx91 lowToMid F T T F F T T T F F T T F F F F F F F F
+tuneEx92 lowToMid F T F F F T T F F F T T T T T F F F F F
+tuneEx93 midToHigh T T F T F T F F F F T T F T T T F F F F
+tuneEx94 midToHigh F T F F F F T T F F T F T T T F F T T T
+tuneEx95 midToHigh F T F T T F T F F F F F T T T T F T T T
+tuneEx96 lowToMid F T T F F F T F F F T T T T T T F F F F
+tuneEx97 lowToMid F T F T T T T T F F T T T T T T F F F F
+tuneEx98 midToHigh F T F F T T T F F F T T T T T T F T T T
+tuneEx99 lowToMid F T T T F T T T T F T T F T T T F F F F
+tuneEx100 lowToMid F T T F F T F F F F T T F T F F F F F F
+tuneEx101 midToHigh F T T F F F T F F F T F T T T T F T T T
+tuneEx102 lowToMid T T T T T T F F F F T T F T T T F T T F
+tuneEx103 lowToMid F T T F F T F F F F T T F F F F F F F F
+tuneEx104 lowToMid F T F F T T T T F F T T F T F F F F F F
+tuneEx105 midToHigh F F F F T F F F F F T F F T F F F T T T
+tuneEx106 lowToMid F T T F T T F F F F T T T T T F F T F F
+tuneEx107 lowToMid F T F T T T T F F F T T F T T T T F F F
+tuneEx108 midToHigh F T F F F T F F F F T T T T T T F F F F
+tuneEx109 lowToMid F F F T F F F F F F T T T T T F F T F F
+tuneEx110 midToHigh F T T F T F F F F F T T T T T F F T T F
+tuneEx111 lowToMid T T F T F T F F F F T T F T T F F T F F
+tuneEx112 lowToMid F T T T T F T T T F T T F T T T T T F F
+tuneEx113 midToHigh F F F F F T T F F F T F T T F F F T F F
+tuneEx114 midToHigh F T T T F T T F F F T T F T T T F T T T
+tuneEx115 lowToMid F F F T T F F F F F T F T T T T F T T T
+tuneEx116 lowToMid F T T F F T F F F F T T F T T T F F F F
+tuneEx117 midToHigh F T T F T T F F F F T T F T T T F T F F
+tuneEx118 midToHigh F T F T T T F F F F T T F T T F F T T T
+tuneEx119 midToHigh T T F T T F F F F F T T F T T T F T T F
+tuneEx120 lowToMid F T T F T T T T F F T T F T T F F F F F
+tuneEx121 lowToMid F T T F F T T T F F T T F T T F F F F F
+tuneEx122 midToHigh F T F F F F T F F F T F F T T T F T T F
+tuneEx123 lowToMid T F F T F F F F F F T T F F F F F F F F
+tuneEx124 midToHigh F T T F F F F F F F T F T T T F F T T F
+tuneEx125 lowToMid F T T F F T F F F F T T F T F F F F F F
+tuneEx126 lowToMid T T F T T T T T F F T T F T T T F F F F
+tuneEx127 midToHigh F T T F F T T F F F T F T T T T F T T F
+tuneEx128 lowToMid F T F T T T T T T F T T F T F F F F F F
+tuneEx129 midToHigh F T F F F F T F F F F F T T T T F T T T
+tuneEx130 midToHigh T T F T F T F F F F T T F T T T F T F F
+tuneEx131 midToHigh F F F T F T F F F F T F F T F F F T T T
+tuneEx132 lowToMid F T F T F T T T T F T T F T F F F F F F
+tuneEx133 midToHigh F T T F F T F F F F T T T T T T F F F F
+tuneEx134 midToHigh F T F T F T F F F F T T F T T T F T T F
+tuneEx135 midToHigh F T T F F T F F F F T T F T T F F T T F
+tuneEx136 midToHigh F T T F F F F F F F T F T T F F F T T F
+tuneEx137 lowToMid F T T T F T F T F F T T F T T F F F F F
+tuneEx138 midToHigh F T F T F F F F F F T F F T T T F T T F
+tuneEx139 lowToMid F T T F F F F F F F T T T T F F F F F F
+tuneEx140 midToHigh F T F F T F T T F F T F T T F F F T T T
+tuneEx141 lowToMid F T T F T T T T T F T T T T F F F T F F
+tuneEx142 lowToMid F T T F T F F F F F T T T T F F F T T F
+tuneEx143 lowToMid F T F T T T T T T F T T F T T F F F F F
+tuneEx144 midToHigh T T F T F T F F F F T T F T T T F T T F
+tuneEx145 midToHigh F T F F F F T T F F F F F F F F F T T F
+tuneEx146 midToHigh F T T F F T T F F F T F T T T T F T T T
+tuneEx147 lowToMid F T T F F T T T F F T T T T F F F T F F
+tuneEx148 lowToMid T T T F F T F F F F T T F F F F F F F F
+tuneEx149 midToHigh F T T F F F F F F F T F T T T T F T T F
+tuneEx150 lowToMid T T F T F T F F F F T T F T T T F T F F
+tuneEx151 lowToMid F T F T T T T T T F T T F T F F F F F F
+tuneEx152 midToHigh F F F T F F T F F F T F F T T T F T T T
+tuneEx153 midToHigh F T T F F T T F F F T F T T T T F T T T
+tuneEx154 lowToMid F T F T T T T T T F T T F T T F F F F F
+tuneEx155 lowToMid F T T F F T F F F F T T T T T F F F F F
+tuneEx156 lowToMid F T T F F F T F F F T T T T T T F T F F
+tuneEx157 midToHigh F T F F F T T F F F T F T T T T F T T F
+tuneEx158 midToHigh F F F T F T T F F F T T T T T T F T F F
+tuneEx159 lowToMid F T F F F F F F F F T F F T T T F T T F
+tuneEx160 midToHigh F T T F F F F F F F F F T F F F F T T T
+tuneEx161 midToHigh F T T F F T T F F F T F T T T T F T T T
+tuneEx162 lowToMid F T T F F T F F F F T T F T F F F F F F
+tuneEx163 lowToMid F F F F F T T F F F T T T T F F F T F F
+tuneEx164 lowToMid F T F T F T F F F F T T F T F F F T T F
+tuneEx165 midToHigh T F F T T T F F F F T T F T T T F T F F
+tuneEx166 lowToMid T T F T F T F F F F T T F F F F F F F F
+tuneEx167 lowToMid F T F F F T T T F F T T F F F F F F F F
+tuneEx168 midToHigh F T T F F T F F F F T F T T T T F T T F
+tuneEx169 midToHigh T F F T F T T F F F T T F T T T F T T T
+tuneEx170 lowToMid F T T F T T F F F F T T T T T T F T F F
+tuneEx171 lowToMid F T T F F T F F F F T T T F F F F T F F
+tuneEx172 lowToMid F F F F F T T F F F T T T T T T F T T F
+tuneEx173 lowToMid F T T F T T F F F F T T F F F F F F F F
+tuneEx174 midToHigh F T T F F F T F F F T F T T T F F T F F
+tuneEx175 lowToMid F T T F F T F F F F T T T T F F F T F F
+tuneEx176 midToHigh F T T F F T T F F F T F T T T T F T T T
+tuneEx177 midToHigh T F F T F F F F F F T T F T T T F T T F
+tuneEx178 midToHigh F T T F F T F F F F T F F T F F F T T F
+tuneEx179 lowToMid F T T F T T F F F F T T F T F F F F F F
+tuneEx180 midToHigh F T F T F T F F F F T T F T T T F F F F
+tuneEx181 lowToMid F T F T F T T T T F T T F T T F F F F F
+tuneEx182 lowToMid F T T T F T T T T F T T F T T T F F F F
+tuneEx183 lowToMid F T T F F T F F F F T T T T F F F F F F
+tuneEx184 lowToMid F T T F F T F F F F T F F T F F F T F F
+tuneEx185 midToHigh F T T F T T F F F F T T T F F F F T T F
+tuneEx186 midToHigh T F F T F T F F F F T T F T T T F T T F
+tuneEx187 lowToMid F T T F F T T T F F T T T T F F F F F F
+tuneEx188 midToHigh F F F F F T F F F F T T T T T F F T F F
+tuneEx189 midToHigh F T T F F T T F F F T F T T F F F T T T
+tuneEx190 midToHigh F T T F F F F F F F T T T T F F F T T F
+tuneEx191 midToHigh F T T F F F F F F F T T T T T T F F F F
+tuneEx192 lowToMid F T F T F T T T T F T T F T T T T F F F
+tuneEx193 midToHigh F T T F F F F F F F T T T T T T F F F F
+tuneEx194 lowToMid F T T F F T F F F F T T T T F F F F F F
+tuneEx195 midToHigh F T T T F T T F F F T T F T T T T F F F
+tuneEx196 lowToMid T T F T F T T F F F T T F T T T F T T F
+tuneEx197 midToHigh T T T T F T T F F F T T F T T F F T F F
+tuneEx198 lowToMid T F F T T T F F F F T T T T T T F F F F
+tuneEx199 lowToMid F T F T F T F F F F T T T T T F F T F F
+tuneEx200 midToHigh F T T F F F F F F F T F T T T T F T T T
+tuneEx201 midToHigh F T F T F T F F F F T T F T T F F T F F
+tuneEx202 lowToMid F T T F F T F F F F T T F F F F F T F F
+tuneEx203 lowToMid F T F F T T T T F F T T F T F F F F F F
+tuneEx204 lowToMid T T F T T T T F F F T T F T T T F T F F
+tuneEx205 midToHigh T F F T F T F F F F T T F T T T F T T F
+tuneEx206 midToHigh T T T F F T T F F F T T F T T T F T T F
+tuneEx207 lowToMid F T T F F T F F F F T T F T F F F F F F
+tuneEx208 lowToMid F T T F F T T F F F T T T T T F F F F F
+tuneEx209 midToHigh T F F T F F T F F F T T F F F F F F F F
+tuneEx210 lowToMid F T T F T T T T T F T T F T T T F F F F
+tuneEx211 lowToMid F T T F F T T F F F T F T T F F F T T T
+tuneEx212 midToHigh F F F T F T T F F F T T T T T T F T F F
+tuneEx213 midToHigh F T F F F T F F F F T T F T T F F F F F
+tuneEx214 lowToMid F T T F F T F F F F T F T T T F F T T T
+tuneEx215 midToHigh F T F T T T F F F F T T F F F F F T T F
+tuneEx216 midToHigh F T T F F T T F F F T F T T T T F T T F
+tuneEx217 midToHigh T F F T F F F F F F T F F T F F F T T T
+tuneEx218 midToHigh F F F T F F T T F F F F F F F F F T T T
+tuneEx219 midToHigh F F F T F T F F F F T F F T T T F T T T
+tuneEx220 midToHigh T T F T F T F F F F T T F T T T F T T T
+tuneEx221 lowToMid F T T F F T F F F F T T T T F F F F F F
+tuneEx222 midToHigh F T T T T T T F F F T T T T T T F T T T
+tuneEx223 lowToMid F T T T F T F F F F T T F T T T T F F F
+tuneEx224 lowToMid T F F T F T F F F F T T F T T F F T F F
+tuneEx225 midToHigh T F F T F T T F F F T F F T T F F T T T
+tuneEx226 lowToMid F T T F F F F F F F T T T T F F F T T F
+tuneEx227 lowToMid T T F T F F F F F F T T F T T F F F F F
+tuneEx228 lowToMid T T F T T T F F F F T T F T T F F T F F
+tuneEx229 midToHigh F T T F F T F F F F T F T F F F F T T T
+tuneEx230 midToHigh T F F T F F T F F F T T F T T T F T T F
+tuneEx231 lowToMid F T T F F T F T T F T T F T T T F F F F
+tuneEx232 midToHigh F T F F F T T F F F T T T T T T F T T F
+tuneEx233 lowToMid F T T F T T T F F F T T T T T T F T F F
+tuneEx234 midToHigh F T F F F T T F F F T T T T T F F F F F
+tuneEx235 lowToMid F T T F F T F F F F T T T T T T F F F F
+tuneEx236 midToHigh F T T F F T F F F F T T T T F F F F F F
+tuneEx237 lowToMid F T T F T T T F F F T T F T T T F F F F
+tuneEx238 midToHigh T T F T T F T F F F T T F T T T F T T T
+tuneEx239 lowToMid F T T F F T T T F F T F T F F F F T F F
+tuneEx240 midToHigh F T F F F T T F F F T T T T T T F T T F
+tuneEx241 lowToMid F T T F F T F F F F T T F T T T F T F F
+tuneEx242 midToHigh F T T F F T F F F F T T F T T F F T F F
+tuneEx243 midToHigh F T F F T T T F F F T T T T T F F T T F
+tuneEx244 midToHigh F F F T F T T F F F T F F T T T F T T T
+tuneEx245 lowToMid T T F T F T T F F F T T T T T T F T F F
+tuneEx246 midToHigh T F F T F T F F F F T T F T T T F F F F
+tuneEx247 lowToMid F F F T F T T F F F T T T T F F F F F F
+tuneEx248 lowToMid F T F T T T T T F F T T F T T T F F F F
+tuneEx249 midToHigh F T T F F T T F F F T F T T T T F T T F
+tuneEx250 lowToMid F T T T F T T T T F T T F T T T F F F F
+tuneEx251 lowToMid F T T F F T F F F F T T F F F F F F F F
+tuneEx252 lowToMid F T T F F T F T F F T T F T T T F F F F
+tuneEx253 midToHigh F T T F F F T F F F T F T T T F F T T T
+tuneEx254 lowToMid F T T F T T T F F F T T F T F F F F F F
+tuneEx255 lowToMid F T T F F T T F F F T T F F F F F T T F
+tuneEx256 midToHigh T F F T F F F F F F T T F T T T F T T F
+tuneEx257 midToHigh T T T T F T F F F F T T F T T F F T F F
+tuneEx258 lowToMid F T T F F T F F F F T T F F F F F F F F
+tuneEx259 midToHigh F T F T F T T F F F T T T T F F F F F F
+tuneEx260 midToHigh T T F T F T T F F F T T F T T T F T F F
+tuneEx261 lowToMid F T T F F T T F F F T F F F F F F F F F
+tuneEx262 midToHigh F T T F T F F F F F T T T T T F F T T F
+tuneEx263 lowToMid F T T F T T T F F F T T F T T T F F F F
+tuneEx264 midToHigh F F F F F T T F F F T F T T F F F T F F
+tuneEx265 midToHigh F T F F F T F F F F T T F F F F F T F F
+tuneEx266 lowToMid F T F T T T T T T F T T F T T F F F F F
+tuneEx267 midToHigh F T T F F T F F F F T T F T T T F F F F
+tuneEx268 lowToMid F T T F F T F F F F T T F T T F F F F F
+tuneEx269 midToHigh F T F F F F F F F F T F F T T T F T T F
+tuneEx270 lowToMid F T T F F T F F F F T T F F F F F F F F
+tuneEx271 midToHigh F F F T F F T F F F T F T T T T F T T F
+tuneEx272 lowToMid F T F T T T T F F F T T F T T T F T T F
+tuneEx273 lowToMid F T T F T T F T F F T T T T F F F F F F
+tuneEx274 midToHigh F F F T T T F F F F T T T T T T F T T T
+tuneEx275 lowToMid F T F T F T T F F F T T T T T F F F F F
+tuneEx276 lowToMid F T T F F T T F F F T T T T T T F T F F
+tuneEx277 lowToMid F T T F F T T F F F T T T T T T F F F F
+tuneEx278 midToHigh T F F T F T F F F F T F F T T F F T T T
+tuneEx279 lowToMid F T F F F F F F F F T F T T F F F T T F
+tuneEx280 lowToMid F T T F F T T T F F T T F F F F F F F F
+tuneEx281 midToHigh T F F T T T T F F F T T F T T T F T T F
+tuneEx282 midToHigh F T T T F F F T F F T F T T T F F T T T
+tuneEx283 midToHigh F T T F F F T F F F T F T T T T F T T T
+tuneEx284 midToHigh F T F T F F F F F F T T T T T T F T F F
+tuneEx285 midToHigh F T T F F T F F F F T T T T F F F F F F
+tuneEx286 lowToMid F T T F F T F F F F T T F T F F F F F F
+tuneEx287 lowToMid F T T F T T T T T F T T F T F F F F F F
+tuneEx288 lowToMid F T T F F T F F F F T F F T F F F T F F
+tuneEx289 midToHigh F T F T F F T F F F T F F T T T F T T F
+tuneEx290 lowToMid F T F F T T F F F F T T T F F F F T T F
+tuneEx291 lowToMid F T F T F T T F F F T T F T T T T F F F
+tuneEx292 lowToMid F F F T F T F F F F T T T T T T F T F F
+tuneEx293 lowToMid T F F T T T F F F F T T F T T F F T T T
+tuneEx294 midToHigh F T F T F T F F F F T T T T F F F F F F
+tuneEx295 lowToMid F T F F F T F F F F T T F T T T F F F F
+tuneEx296 midToHigh F T T T F F F F F F T F F F F F F F F F
+tuneEx297 midToHigh F T F F F T F F F F T T T T T T F F F F
+tuneEx298 midToHigh T T F T T F F F F F T T F T T T F T T F
